@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "finmind-price-risk-tcn"
+version = "0.1.0"
+description = "An independent FIN-MIND reconstruction for joint price and risk forecasting with a multi-dimensional TCN"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26,<3", "torch>=2.2,<3"]
+
+[project.scripts]
+finmind = "run_finmind:main"
+
+[tool.setuptools]
+packages = ["finmind"]
+py-modules = ["run_finmind", "baseline_original"]

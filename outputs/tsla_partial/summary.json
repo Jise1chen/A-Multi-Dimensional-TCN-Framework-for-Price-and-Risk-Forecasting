@@ -1,0 +1,700 @@
+{
+  "paper": "https://doi.org/10.20944/preprints202510.2049.v1",
+  "verdict": "Partial",
+  "status": "method_reconstruction_on_csv",
+  "limitations": [
+    "Input data does not cover the paper's full 2015-2024-06 period.",
+    "Risk-label definitions and model/training hyperparameters are explicit reconstruction assumptions.",
+    "Original author code, exact seed list, and rolling refit schedule are not supplied by the paper.",
+    "ARIMA/LSTM/Transformer comparisons and statistical significance are not reproduced."
+  ],
+  "symbol": "TSLA",
+  "source": "./data/raw/TSLA.csv (adj-close)",
+  "input_sha256": "680ae2bc3d6942de3c677990940ca3524e2ea9251d3a0d29d7e9233e07638ba8",
+  "raw_rows": 1709,
+  "data_start": "2015-01-02",
+  "data_end": "2021-10-14",
+  "feature_names": [
+    "open",
+    "high",
+    "low",
+    "close",
+    "log_volume",
+    "return",
+    "log_range",
+    "overnight_gap",
+    "intraday_return",
+    "momentum_5",
+    "momentum_20",
+    "rolling_volatility",
+    "rolling_sharpe"
+  ],
+  "target_names": [
+    "open",
+    "close",
+    "volatility",
+    "sharpe"
+  ],
+  "risk_definition": {
+    "volatility": "rolling",
+    "window": 20,
+    "annual_rf": 0.0,
+    "annualization": 252,
+    "sharpe": "trailing-window statistic ending on target day, ddof=1"
+  },
+  "config": {
+    "lookback": 64,
+    "hidden": 16,
+    "levels": 4,
+    "kernel": 3,
+    "dropout": 0.1,
+    "batch_size": 64,
+    "epochs": 15,
+    "patience": 4,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "refit_every": 63,
+    "device": "cpu"
+  },
+  "seeds": [
+    9416042
+  ],
+  "data_seed": null,
+  "split": {
+    "train": {
+      "n": 1174,
+      "start": "2015-05-05",
+      "end": "2019-12-31"
+    },
+    "validation": {
+      "n": 253,
+      "start": "2020-01-02",
+      "end": "2020-12-31"
+    },
+    "test": {
+      "n": 198,
+      "start": "2021-01-04",
+      "end": "2021-10-14"
+    }
+  },
+  "versions": {
+    "python": "3.12.10",
+    "numpy": "2.5.3",
+    "torch": "2.14.0"
+  },
+  "baseline": {
+    "variant": "persistence",
+    "seed": null,
+    "metrics": {
+      "open": {
+        "mae": 8.636765959595959,
+        "rmse": 12.613239588471538,
+        "r2": 0.97313507198126
+      },
+      "close": {
+        "mae": 15.965101434343437,
+        "rmse": 22.363695379894633,
+        "r2": 0.9163461195409996
+      },
+      "volatility": {
+        "mae": 0.020165496841287437,
+        "rmse": 0.04314769606743136,
+        "r2": 0.9548969462660089
+      },
+      "sharpe": {
+        "mae": 1.0075934619995879,
+        "rmse": 1.303840092202101,
+        "r2": 0.8455939488442485
+      }
+    },
+    "price_rmse": 18.155284133839743,
+    "negative_volatility_predictions": 0
+  },
+  "aggregate": {
+    "decoupled": {
+      "open": {
+        "mae": {
+          "mean": 147.36351158676268,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "rmse": {
+          "mean": 196.4910895936421,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "r2": {
+          "mean": -5.5195573899707995,
+          "seed_std": null,
+          "seeds": 1
+        }
+      },
+      "close": {
+        "mae": {
+          "mean": 144.9832677815385,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "rmse": {
+          "mean": 187.80962115473238,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "r2": {
+          "mean": -4.899763852445776,
+          "seed_std": null,
+          "seeds": 1
+        }
+      },
+      "volatility": {
+        "mae": {
+          "mean": 0.17935884894520981,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "rmse": {
+          "mean": 0.20740459883933715,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "r2": {
+          "mean": -0.042143415908558524,
+          "seed_std": null,
+          "seeds": 1
+        }
+      },
+      "sharpe": {
+        "mae": {
+          "mean": 3.2574237266912647,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "rmse": {
+          "mean": 4.230541781363226,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "r2": {
+          "mean": -0.6255773187544695,
+          "seed_std": null,
+          "seeds": 1
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "variant": "decoupled",
+      "seed": 9416042,
+      "metrics": {
+        "open": {
+          "mae": 147.36351158676268,
+          "rmse": 196.4910895936421,
+          "r2": -5.5195573899707995
+        },
+        "close": {
+          "mae": 144.9832677815385,
+          "rmse": 187.80962115473238,
+          "r2": -4.899763852445776
+        },
+        "volatility": {
+          "mae": 0.17935884894520981,
+          "rmse": 0.20740459883933715,
+          "r2": -0.042143415908558524
+        },
+        "sharpe": {
+          "mae": 3.2574237266912647,
+          "rmse": 4.230541781363226,
+          "r2": -0.6255773187544695
+        }
+      },
+      "price_rmse": 192.19937836525483,
+      "negative_volatility_predictions": 0,
+      "standardized_joint_mse": 1.6445632240526842,
+      "training_audit": {
+        "selected_epochs": 8,
+        "selection_history": [
+          {
+            "epoch": 1,
+            "train_uncertainty_loss": 1.9614255716691025,
+            "validation_standardized_mse": 224.79749934381175
+          },
+          {
+            "epoch": 2,
+            "train_uncertainty_loss": 1.5784105564097937,
+            "validation_standardized_mse": 142.50108994796813
+          },
+          {
+            "epoch": 3,
+            "train_uncertainty_loss": 1.3036063338869475,
+            "validation_standardized_mse": 100.26349262946208
+          },
+          {
+            "epoch": 4,
+            "train_uncertainty_loss": 1.1193717858251153,
+            "validation_standardized_mse": 81.36447613983758
+          },
+          {
+            "epoch": 5,
+            "train_uncertainty_loss": 1.0253348567822926,
+            "validation_standardized_mse": 76.41076901401927
+          },
+          {
+            "epoch": 6,
+            "train_uncertainty_loss": 0.9433156692595863,
+            "validation_standardized_mse": 83.29567456151186
+          },
+          {
+            "epoch": 7,
+            "train_uncertainty_loss": 0.8882449434806785,
+            "validation_standardized_mse": 74.15201251968564
+          },
+          {
+            "epoch": 8,
+            "train_uncertainty_loss": 0.8158889592607749,
+            "validation_standardized_mse": 66.80886635761487
+          },
+          {
+            "epoch": 9,
+            "train_uncertainty_loss": 0.7453190831553185,
+            "validation_standardized_mse": 80.45963549708189
+          },
+          {
+            "epoch": 10,
+            "train_uncertainty_loss": 0.6490920245952054,
+            "validation_standardized_mse": 77.98791624529089
+          },
+          {
+            "epoch": 11,
+            "train_uncertainty_loss": 0.5647735610934295,
+            "validation_standardized_mse": 92.4478229025136
+          },
+          {
+            "epoch": 12,
+            "train_uncertainty_loss": 0.47733649504854897,
+            "validation_standardized_mse": 94.64755116338316
+          }
+        ],
+        "folds": [
+          {
+            "fold": 0,
+            "train_count": 1427,
+            "test_count": 63,
+            "train_target_end": "2020-12-31",
+            "scaler_feature_end": "2020-12-30",
+            "test_start": "2021-01-04",
+            "test_end": "2021-04-05",
+            "x_scaler": {
+              "mean": [
+                93.46591026510066,
+                95.58302962214768,
+                91.27724561275159,
+                93.63124562953014,
+                17.309462726002977,
+                0.00251210534995351,
+                0.03829541905670561,
+                0.0015308805128572854,
+                0.0009927382730755864,
+                0.012733376054547019,
+                0.05207591147761698,
+                0.4940351025938559,
+                1.1934147047669976
+              ],
+              "scale": [
+                111.38331290797349,
+                114.53493942424365,
+                108.06595412694173,
+                111.96156448661255,
+                0.6182448146182304,
+                0.034865889177476496,
+                0.023707391887043374,
+                0.02289535244772676,
+                0.02680899215949685,
+                0.08281115168393174,
+                0.17987200511447696,
+                0.2421017830373066,
+                3.9379764704483824
+              ]
+            },
+            "y_scaler": {
+              "mean": [
+                96.23723775473019,
+                96.41123472810091,
+                0.5001077540423231,
+                1.2143099783949722
+              ],
+              "scale": [
+                114.37257854488043,
+                114.97863119748303,
+                0.24566855648212918,
+                3.9716759747529755
+              ]
+            },
+            "log_variance": [
+              -0.17984941601753235,
+              -0.17484602332115173,
+              -0.15987862646579742,
+              -0.021354863420128822
+            ],
+            "checkpoint": "outputs/tsla_partial/checkpoints/decoupled_seed9416042_fold0.pt",
+            "history": [
+              {
+                "epoch": 1,
+                "train_uncertainty_loss": 1.7438336039391447,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 2,
+                "train_uncertainty_loss": 1.0406734091298264,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 3,
+                "train_uncertainty_loss": 0.8183922100167385,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 4,
+                "train_uncertainty_loss": 0.7069656125882663,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 5,
+                "train_uncertainty_loss": 0.623592836922002,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 6,
+                "train_uncertainty_loss": 0.5859183829066297,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 7,
+                "train_uncertainty_loss": 0.5178091618759112,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 8,
+                "train_uncertainty_loss": 0.45300974875960054,
+                "validation_standardized_mse": null
+              }
+            ]
+          },
+          {
+            "fold": 1,
+            "train_count": 1490,
+            "test_count": 63,
+            "train_target_end": "2021-04-05",
+            "scaler_feature_end": "2021-04-01",
+            "test_start": "2021-04-06",
+            "test_end": "2021-07-02",
+            "x_scaler": {
+              "mean": [
+                120.22655267417902,
+                122.92686677141022,
+                117.23281773148727,
+                120.2976920888602,
+                17.30966282697287,
+                0.0024200126400529,
+                0.03890365910684264,
+                0.0015819359293349473,
+                0.0008473974708353507,
+                0.012251687581487626,
+                0.0511318996969697,
+                0.502141702885972,
+                1.174463448230845
+              ],
+              "scale": [
+                170.73873597462082,
+                174.83967693247152,
+                165.79099594282076,
+                170.79588659463766,
+                0.6107231403216418,
+                0.03537309779443538,
+                0.024107854643745184,
+                0.02297773411913652,
+                0.02726878689220888,
+                0.08327885756265843,
+                0.18119467246824142,
+                0.24354333479373386,
+                3.9423971093709373
+              ]
+            },
+            "y_scaler": {
+              "mean": [
+                124.01737470872484,
+                124.07783341476508,
+                0.5085007927614412,
+                1.1920943756437838
+              ],
+              "scale": [
+                174.1630176127719,
+                174.18403689743172,
+                0.24700129262094309,
+                3.973970545158894
+              ]
+            },
+            "log_variance": [
+              -0.19496193528175354,
+              -0.1923818439245224,
+              -0.16664069890975952,
+              -0.03180016949772835
+            ],
+            "checkpoint": "outputs/tsla_partial/checkpoints/decoupled_seed9416042_fold1.pt",
+            "history": [
+              {
+                "epoch": 1,
+                "train_uncertainty_loss": 1.7399136202447367,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 2,
+                "train_uncertainty_loss": 1.077291281271301,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 3,
+                "train_uncertainty_loss": 0.8375315633396174,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 4,
+                "train_uncertainty_loss": 0.7118084889930366,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 5,
+                "train_uncertainty_loss": 0.635123954283311,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 6,
+                "train_uncertainty_loss": 0.5629537658403384,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 7,
+                "train_uncertainty_loss": 0.4948025474612345,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 8,
+                "train_uncertainty_loss": 0.43907638020163414,
+                "validation_standardized_mse": null
+              }
+            ]
+          },
+          {
+            "fold": 2,
+            "train_count": 1553,
+            "test_count": 63,
+            "train_target_end": "2021-07-02",
+            "scaler_feature_end": "2021-07-01",
+            "test_start": "2021-07-06",
+            "test_end": "2021-10-01",
+            "x_scaler": {
+              "mean": [
+                140.93708306559415,
+                144.02051598700504,
+                137.58566587623753,
+                141.007274673886,
+                17.302860028617154,
+                0.002356537636187643,
+                0.03886467220535521,
+                0.001535490288829952,
+                0.000832955860112158,
+                0.012047764262539267,
+                0.04903167335984954,
+                0.5017816475832442,
+                1.1255062321390275
+              ],
+              "scale": [
+                196.721610178597,
+                201.14218822282203,
+                191.65098604420473,
+                196.76179965001702,
+                0.6020119454824887,
+                0.035136661355014406,
+                0.023820501561609256,
+                0.022784186170282553,
+                0.02721823023623656,
+                0.08262108830652065,
+                0.17950098223186298,
+                0.23953299389482186,
+                3.9275939018175876
+              ]
+            },
+            "y_scaler": {
+              "mean": [
+                145.39578120090158,
+                145.46636309272367,
+                0.5074699717362164,
+                1.1424854169252772
+              ],
+              "scale": [
+                200.0631335407881,
+                200.10371808075297,
+                0.24260839368032894,
+                3.959100998506727
+              ]
+            },
+            "log_variance": [
+              -0.2049887478351593,
+              -0.19751369953155518,
+              -0.1824096441268921,
+              -0.0408230759203434
+            ],
+            "checkpoint": "outputs/tsla_partial/checkpoints/decoupled_seed9416042_fold2.pt",
+            "history": [
+              {
+                "epoch": 1,
+                "train_uncertainty_loss": 1.731281524462924,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 2,
+                "train_uncertainty_loss": 1.0364700074895918,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 3,
+                "train_uncertainty_loss": 0.7926413401126554,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 4,
+                "train_uncertainty_loss": 0.6816610128589392,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 5,
+                "train_uncertainty_loss": 0.6104887939620156,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 6,
+                "train_uncertainty_loss": 0.5254861061909241,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 7,
+                "train_uncertainty_loss": 0.48278226427546794,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 8,
+                "train_uncertainty_loss": 0.4073949064351786,
+                "validation_standardized_mse": null
+              }
+            ]
+          },
+          {
+            "fold": 3,
+            "train_count": 1616,
+            "test_count": 9,
+            "train_target_end": "2021-10-01",
+            "scaler_feature_end": "2021-09-30",
+            "test_start": "2021-10-04",
+            "test_end": "2021-10-14",
+            "x_scaler": {
+              "mean": [
+                162.12388108278745,
+                165.4862679404408,
+                158.51888990291826,
+                162.22752569326963,
+                17.281163689482746,
+                0.0023552272653652004,
+                0.03851333133027267,
+                0.0015111202977199185,
+                0.0008560032636823425,
+                0.012033161166028374,
+                0.049387978789543104,
+                0.49485507630533493,
+                1.1756158329675528
+              ],
+              "scale": [
+                220.96195610251814,
+                225.434448513146,
+                216.00809727668275,
+                221.08524637601147,
+                0.6031124640633787,
+                0.034672525462624205,
+                0.02354711816032165,
+                0.02242664063472343,
+                0.026918802547653144,
+                0.08137594922856821,
+                0.17630123143184517,
+                0.23773135505784118,
+                3.87799162718643
+              ]
+            },
+            "y_scaler": {
+              "mean": [
+                167.29624898081693,
+                167.3996544529702,
+                0.5000324706900371,
+                1.1922130386361696
+              ],
+              "scale": [
+                224.4016005294188,
+                224.52118867240412,
+                0.24081997171288144,
+                3.9051881775507993
+              ]
+            },
+            "log_variance": [
+              -0.20766638219356537,
+              -0.2003447264432907,
+              -0.18326355516910553,
+              -0.02850162424147129
+            ],
+            "checkpoint": "outputs/tsla_partial/checkpoints/decoupled_seed9416042_fold3.pt",
+            "history": [
+              {
+                "epoch": 1,
+                "train_uncertainty_loss": 1.7165231822740914,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 2,
+                "train_uncertainty_loss": 1.0138488046013483,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 3,
+                "train_uncertainty_loss": 0.7515144330440181,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 4,
+                "train_uncertainty_loss": 0.6678971075775599,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 5,
+                "train_uncertainty_loss": 0.6111071499267428,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 6,
+                "train_uncertainty_loss": 0.5441632368186913,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 7,
+                "train_uncertainty_loss": 0.47735491129431395,
+                "validation_standardized_mse": null
+              },
+              {
+                "epoch": 8,
+                "train_uncertainty_loss": 0.4137785526195375,
+                "validation_standardized_mse": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "metric_notes": "Price metrics are USD only for USD input. Risk metrics are separate annualized units. Standardized joint MSE is a diagnostic, not the learned uncertainty training objective. No trading performance is inferred from forecast metrics."
+}

@@ -1,0 +1,48 @@
+{
+  "verified_at_utc": "2026-09-20T02:22:18.628661+00:00",
+  "project_name": "价格预测与风险预测的多维时间卷积网络（TCN）框架",
+  "copied_python_files": 8,
+  "source_code_matches_original": true,
+  "unit_tests": {
+    "command": "../.venv/bin/python -m unittest discover -s tests -v",
+    "passed": 18,
+    "failed": 0
+  },
+  "relocated_cli_smoke": {
+    "command": "../.venv/bin/python run_finmind.py --demo --n 180 --lookback 16 --hidden 4 --levels 1 --epochs 1 --batch-size 32 --refit-every 17 --output outputs/project_smoke",
+    "exit_code": 0,
+    "summary": "outputs/project_smoke/summary.json"
+  },
+  "checks": [
+    "Python syntax parsed",
+    "pyproject.toml parsed",
+    "Markdown local links resolve",
+    "Copied original files verified by SHA-256"
+  ],
+  "environment_note": "Verification used the original workspace virtual environment. Recreate .venv inside this project with requirements.txt when running independently.",
+  "sidebar_registration": "Not registered: computer-use tool disallows controlling Codex UI.",
+  "documentation_update": {
+    "at_utc": "2026-09-20T02:28:48.812433+00:00",
+    "guide": "研究流程解读.md",
+    "basis": "User-provided Diffusion-Generated Volatility Surfaces for Option Hedging project description; organization only, not transferred algorithm assumptions.",
+    "checks": [
+      "Local Markdown links resolve",
+      "Python source matches existing implementation",
+      "Reference-run configuration cross-checked with saved summary"
+    ],
+    "tests_rerun": false,
+    "reason": "Documentation-only update; model code and empirical results unchanged."
+  },
+  "english_readme_update": {
+    "at_utc": "2026-09-20T02:37:58.755584+00:00",
+    "language": "English",
+    "checks": [
+      "No CJK characters in README",
+      "Local document links resolve after URL decoding",
+      "Existing shell command blocks preserved exactly",
+      "Closing-price RMSE figures match saved experiment summaries"
+    ],
+    "tests_rerun": false,
+    "reason": "Documentation-only update."
+  }
+}

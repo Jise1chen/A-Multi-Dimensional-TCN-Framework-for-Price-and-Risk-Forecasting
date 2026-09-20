@@ -1,0 +1,53 @@
+{
+  "paper": "https://doi.org/10.20944/preprints202510.2049.v1",
+  "audited_at_utc": "2026-09-20T01:53:28.083264+00:00",
+  "datasets": [
+    {
+      "symbol": "AAPL",
+      "file": "data/raw/EOD-AAPL.csv",
+      "dataset_url": "https://www.kaggle.com/datasets/deanleung/apple-dataset",
+      "download_url": "https://www.kaggle.com/api/v1/datasets/download/deanleung/apple-dataset",
+      "sha256": "8200ce65fbebee57efe2ec70e45524d0622563ff610e976b65018f3278940148",
+      "rows": 1090,
+      "date_start": "2013-09-03",
+      "date_end": "2017-12-28",
+      "columns": [
+        "Date",
+        "Open",
+        "High",
+        "Low",
+        "Close",
+        "Volume",
+        "Dividend",
+        "Split",
+        "Adj_Open",
+        "Adj_High",
+        "Adj_Low",
+        "Adj_Close",
+        "Adj_Volume"
+      ],
+      "covers_paper_period": false
+    },
+    {
+      "symbol": "TSLA",
+      "file": "data/raw/TSLA.csv",
+      "dataset_url": "https://www.kaggle.com/datasets/abhimaneukj/tesla-inc-tsla-dataset",
+      "download_url": "https://www.kaggle.com/api/v1/datasets/download/abhimaneukj/tesla-inc-tsla-dataset",
+      "sha256": "680ae2bc3d6942de3c677990940ca3524e2ea9251d3a0d29d7e9233e07638ba8",
+      "rows": 2843,
+      "date_start": "2010-07-01",
+      "date_end": "2021-10-14",
+      "columns": [
+        "Date",
+        "Open",
+        "High",
+        "Low",
+        "Close",
+        "Adj Close",
+        "Volume"
+      ],
+      "covers_paper_period": false
+    }
+  ],
+  "note": "Currently downloadable referenced datasets do not cover the full stated experiment period. This does not establish what versions the authors used."
+}

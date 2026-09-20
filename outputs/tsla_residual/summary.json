@@ -1,0 +1,527 @@
+{
+  "paper": "https://doi.org/10.20944/preprints202510.2049.v1",
+  "verdict": "Partial",
+  "status": "method_reconstruction_on_csv",
+  "limitations": [
+    "Input data does not cover the paper's full 2015-2024-06 period.",
+    "Risk-label definitions and model/training hyperparameters are explicit reconstruction assumptions.",
+    "Original author code, exact seed list, and rolling refit schedule are not supplied by the paper.",
+    "ARIMA/LSTM/Transformer comparisons and statistical significance are not reproduced.",
+    "Price residual targets are an algorithmic extension, not a literal reproduction of the paper."
+  ],
+  "symbol": "TSLA",
+  "source": "./data/raw/TSLA.csv (adj-close)",
+  "input_sha256": "680ae2bc3d6942de3c677990940ca3524e2ea9251d3a0d29d7e9233e07638ba8",
+  "raw_rows": 1709,
+  "data_start": "2015-01-02",
+  "data_end": "2021-10-14",
+  "feature_names": [
+    "open",
+    "high",
+    "low",
+    "close",
+    "log_volume",
+    "return",
+    "log_range",
+    "overnight_gap",
+    "intraday_return",
+    "momentum_5",
+    "momentum_20",
+    "rolling_volatility",
+    "rolling_sharpe"
+  ],
+  "target_names": [
+    "open",
+    "close",
+    "volatility",
+    "sharpe"
+  ],
+  "risk_definition": {
+    "volatility": "rolling",
+    "window": 20,
+    "annual_rf": 0.0,
+    "annualization": 252,
+    "sharpe": "trailing-window statistic ending on target day, ddof=1"
+  },
+  "config": {
+    "lookback": 64,
+    "hidden": 16,
+    "levels": 4,
+    "kernel": 3,
+    "dropout": 0.1,
+    "batch_size": 64,
+    "epochs": 15,
+    "patience": 4,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "refit_every": 63,
+    "device": "cpu",
+    "price_target": "residual"
+  },
+  "seeds": [
+    9416042
+  ],
+  "data_seed": null,
+  "split": {
+    "train": {
+      "n": 1174,
+      "start": "2015-05-05",
+      "end": "2019-12-31"
+    },
+    "validation": {
+      "n": 253,
+      "start": "2020-01-02",
+      "end": "2020-12-31"
+    },
+    "test": {
+      "n": 198,
+      "start": "2021-01-04",
+      "end": "2021-10-14"
+    }
+  },
+  "versions": {
+    "python": "3.12.10",
+    "numpy": "2.5.3",
+    "torch": "2.14.0"
+  },
+  "baseline": {
+    "variant": "persistence",
+    "seed": null,
+    "metrics": {
+      "open": {
+        "mae": 8.636765959595959,
+        "rmse": 12.613239588471538,
+        "r2": 0.97313507198126
+      },
+      "close": {
+        "mae": 15.965101434343437,
+        "rmse": 22.363695379894633,
+        "r2": 0.9163461195409996
+      },
+      "volatility": {
+        "mae": 0.020165496841287437,
+        "rmse": 0.04314769606743136,
+        "r2": 0.9548969462660089
+      },
+      "sharpe": {
+        "mae": 1.0075934619995879,
+        "rmse": 1.303840092202101,
+        "r2": 0.8455939488442485
+      }
+    },
+    "price_rmse": 18.155284133839743,
+    "negative_volatility_predictions": 0
+  },
+  "aggregate": {
+    "decoupled": {
+      "open": {
+        "mae": {
+          "mean": 8.566735600418996,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "rmse": {
+          "mean": 12.622415361153074,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "r2": {
+          "mean": 0.9730959708234495,
+          "seed_std": null,
+          "seeds": 1
+        }
+      },
+      "close": {
+        "mae": {
+          "mean": 16.06841230322724,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "rmse": {
+          "mean": 22.49728153398334,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "r2": {
+          "mean": 0.9153437470742036,
+          "seed_std": null,
+          "seeds": 1
+        }
+      },
+      "volatility": {
+        "mae": {
+          "mean": 0.17611045269419562,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "rmse": {
+          "mean": 0.1997142635472956,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "r2": {
+          "mean": 0.033706870443750314,
+          "seed_std": null,
+          "seeds": 1
+        }
+      },
+      "sharpe": {
+        "mae": {
+          "mean": 2.6606717432947575,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "rmse": {
+          "mean": 3.3712106155568464,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "r2": {
+          "mean": -0.03225602297487651,
+          "seed_std": null,
+          "seeds": 1
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "variant": "decoupled",
+      "seed": 9416042,
+      "metrics": {
+        "open": {
+          "mae": 8.566735600418996,
+          "rmse": 12.622415361153074,
+          "r2": 0.9730959708234495
+        },
+        "close": {
+          "mae": 16.06841230322724,
+          "rmse": 22.49728153398334,
+          "r2": 0.9153437470742036
+        },
+        "volatility": {
+          "mae": 0.17611045269419562,
+          "rmse": 0.1997142635472956,
+          "r2": 0.033706870443750314
+        },
+        "sharpe": {
+          "mae": 2.6606717432947575,
+          "rmse": 3.3712106155568464,
+          "r2": -0.03225602297487651
+        }
+      },
+      "price_rmse": 18.240792827736147,
+      "negative_volatility_predictions": 0,
+      "standardized_joint_mse": 4.209881990820295,
+      "training_audit": {
+        "selected_epochs": 1,
+        "selection_history": [
+          {
+            "epoch": 1,
+            "train_uncertainty_loss": 2.0351138021511357,
+            "validation_standardized_mse": 57.83389197790576
+          },
+          {
+            "epoch": 2,
+            "train_uncertainty_loss": 1.946007432482718,
+            "validation_standardized_mse": 60.95497052942811
+          },
+          {
+            "epoch": 3,
+            "train_uncertainty_loss": 1.8767943697040694,
+            "validation_standardized_mse": 60.597140707988515
+          },
+          {
+            "epoch": 4,
+            "train_uncertainty_loss": 1.8144528945016292,
+            "validation_standardized_mse": 58.4869039784307
+          },
+          {
+            "epoch": 5,
+            "train_uncertainty_loss": 1.7621584631109157,
+            "validation_standardized_mse": 58.978839859189726
+          }
+        ],
+        "folds": [
+          {
+            "fold": 0,
+            "train_count": 1427,
+            "test_count": 63,
+            "train_target_end": "2020-12-31",
+            "scaler_feature_end": "2020-12-30",
+            "test_start": "2021-01-04",
+            "test_end": "2021-04-05",
+            "x_scaler": {
+              "mean": [
+                93.46591026510066,
+                95.58302962214768,
+                91.27724561275159,
+                93.63124562953014,
+                17.309462726002977,
+                0.00251210534995351,
+                0.03829541905670561,
+                0.0015308805128572854,
+                0.0009927382730755864,
+                0.012733376054547019,
+                0.05207591147761698,
+                0.4940351025938559,
+                1.1934147047669976
+              ],
+              "scale": [
+                111.38331290797349,
+                114.53493942424365,
+                108.06595412694173,
+                111.96156448661255,
+                0.6182448146182304,
+                0.034865889177476496,
+                0.023707391887043374,
+                0.02289535244772676,
+                0.02680899215949685,
+                0.08281115168393174,
+                0.17987200511447696,
+                0.2421017830373066,
+                3.9379764704483824
+              ]
+            },
+            "y_scaler": {
+              "mean": [
+                0.28820904064470926,
+                0.462206014015417,
+                0.5001077540423231,
+                1.2143099783949722
+              ],
+              "scale": [
+                4.588756005095967,
+                6.9191374131993655,
+                0.24566855648212918,
+                3.9716759747529755
+              ]
+            },
+            "log_variance": [
+              -0.00021896837279200554,
+              -0.004510014783591032,
+              0.004657337907701731,
+              -0.0004122250829823315
+            ],
+            "checkpoint": "outputs/tsla_residual/checkpoints/decoupled_seed9416042_fold0.pt",
+            "history": [
+              {
+                "epoch": 1,
+                "train_uncertainty_loss": 2.0100611670500093,
+                "validation_standardized_mse": null
+              }
+            ]
+          },
+          {
+            "fold": 1,
+            "train_count": 1490,
+            "test_count": 63,
+            "train_target_end": "2021-04-05",
+            "scaler_feature_end": "2021-04-01",
+            "test_start": "2021-04-06",
+            "test_end": "2021-07-02",
+            "x_scaler": {
+              "mean": [
+                120.22655267417902,
+                122.92686677141022,
+                117.23281773148727,
+                120.2976920888602,
+                17.30966282697287,
+                0.0024200126400529,
+                0.03890365910684264,
+                0.0015819359293349473,
+                0.0008473974708353507,
+                0.012251687581487626,
+                0.0511318996969697,
+                0.502141702885972,
+                1.174463448230845
+              ],
+              "scale": [
+                170.73873597462082,
+                174.83967693247152,
+                165.79099594282076,
+                170.79588659463766,
+                0.6107231403216418,
+                0.03537309779443538,
+                0.024107854643745184,
+                0.02297773411913652,
+                0.02726878689220888,
+                0.08327885756265843,
+                0.18119467246824142,
+                0.24354333479373386,
+                3.9423971093709373
+              ]
+            },
+            "y_scaler": {
+              "mean": [
+                0.3723922919463084,
+                0.43285099798657717,
+                0.5085007927614412,
+                1.1920943756437838
+              ],
+              "scale": [
+                5.924306134583954,
+                9.470893448466683,
+                0.24700129262094309,
+                3.973970545158894
+              ]
+            },
+            "log_variance": [
+              -0.010843349620699883,
+              -0.009921019896864891,
+              0.00620053568854928,
+              0.0016600171802565455
+            ],
+            "checkpoint": "outputs/tsla_residual/checkpoints/decoupled_seed9416042_fold1.pt",
+            "history": [
+              {
+                "epoch": 1,
+                "train_uncertainty_loss": 2.0111475205261433,
+                "validation_standardized_mse": null
+              }
+            ]
+          },
+          {
+            "fold": 2,
+            "train_count": 1553,
+            "test_count": 63,
+            "train_target_end": "2021-07-02",
+            "scaler_feature_end": "2021-07-01",
+            "test_start": "2021-07-06",
+            "test_end": "2021-10-01",
+            "x_scaler": {
+              "mean": [
+                140.93708306559415,
+                144.02051598700504,
+                137.58566587623753,
+                141.007274673886,
+                17.302860028617154,
+                0.002356537636187643,
+                0.03886467220535521,
+                0.001535490288829952,
+                0.000832955860112158,
+                0.012047764262539267,
+                0.04903167335984954,
+                0.5017816475832442,
+                1.1255062321390275
+              ],
+              "scale": [
+                196.721610178597,
+                201.14218822282203,
+                191.65098604420473,
+                196.76179965001702,
+                0.6020119454824887,
+                0.035136661355014406,
+                0.023820501561609256,
+                0.022784186170282553,
+                0.02721823023623656,
+                0.08262108830652065,
+                0.17950098223186298,
+                0.23953299389482186,
+                3.9275939018175876
+              ]
+            },
+            "y_scaler": {
+              "mean": [
+                0.33688624919510557,
+                0.40746814101738577,
+                0.5074699717362164,
+                1.1424854169252772
+              ],
+              "scale": [
+                6.118097979255236,
+                10.002211547755433,
+                0.24260839368032894,
+                3.959100998506727
+              ]
+            },
+            "log_variance": [
+              0.0011249042581766844,
+              0.0014352899743244052,
+              -0.001869124360382557,
+              0.0015908523928374052
+            ],
+            "checkpoint": "outputs/tsla_residual/checkpoints/decoupled_seed9416042_fold2.pt",
+            "history": [
+              {
+                "epoch": 1,
+                "train_uncertainty_loss": 2.0148307211692305,
+                "validation_standardized_mse": null
+              }
+            ]
+          },
+          {
+            "fold": 3,
+            "train_count": 1616,
+            "test_count": 9,
+            "train_target_end": "2021-10-01",
+            "scaler_feature_end": "2021-09-30",
+            "test_start": "2021-10-04",
+            "test_end": "2021-10-14",
+            "x_scaler": {
+              "mean": [
+                162.12388108278745,
+                165.4862679404408,
+                158.51888990291826,
+                162.22752569326963,
+                17.281163689482746,
+                0.0023552272653652004,
+                0.03851333133027267,
+                0.0015111202977199185,
+                0.0008560032636823425,
+                0.012033161166028374,
+                0.049387978789543104,
+                0.49485507630533493,
+                1.1756158329675528
+              ],
+              "scale": [
+                220.96195610251814,
+                225.434448513146,
+                216.00809727668275,
+                221.08524637601147,
+                0.6031124640633787,
+                0.034672525462624205,
+                0.02354711816032165,
+                0.02242664063472343,
+                0.026918802547653144,
+                0.08137594922856821,
+                0.17630123143184517,
+                0.23773135505784118,
+                3.87799162718643
+              ]
+            },
+            "y_scaler": {
+              "mean": [
+                0.34778139047029644,
+                0.4511868626237624,
+                0.5000324706900371,
+                1.1922130386361696
+              ],
+              "scale": [
+                6.136198061119466,
+                10.158934183550098,
+                0.24081997171288144,
+                3.9051881775507993
+              ]
+            },
+            "log_variance": [
+              -0.0011658543953672051,
+              -0.0009056553244590759,
+              0.0009134623105637729,
+              0.005084492266178131
+            ],
+            "checkpoint": "outputs/tsla_residual/checkpoints/decoupled_seed9416042_fold3.pt",
+            "history": [
+              {
+                "epoch": 1,
+                "train_uncertainty_loss": 2.0116472881619294,
+                "validation_standardized_mse": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "metric_notes": "Price metrics are USD only for USD input. Risk metrics are separate annualized units. Standardized joint MSE is a diagnostic, not the learned uncertainty training objective. No trading performance is inferred from forecast metrics."
+}

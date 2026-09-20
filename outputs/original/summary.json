@@ -1,0 +1,7 @@
+{
+  "price_rmse": 0.015295535797973747,
+  "risk_rmse": 0.02082117371200243,
+  "joint_loss": 0.00045071405271978693,
+  "signal_to_risk_ratio": 0.4086766453660696,
+  "verdict": "Partial"
+}

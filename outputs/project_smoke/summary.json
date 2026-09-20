@@ -1,0 +1,368 @@
+{
+  "paper": "https://doi.org/10.20944/preprints202510.2049.v1",
+  "verdict": "Partial",
+  "status": "synthetic_smoke_test",
+  "limitations": [
+    "Synthetic OHLCV only: these are software validation results, not paper results.",
+    "Risk-label definitions and model/training hyperparameters are explicit reconstruction assumptions.",
+    "Original author code, exact seed list, and rolling refit schedule are not supplied by the paper.",
+    "ARIMA/LSTM/Transformer comparisons and statistical significance are not reproduced."
+  ],
+  "symbol": "SYNTHETIC",
+  "source": "synthetic(seed=9416042, n=180); not market data",
+  "input_sha256": null,
+  "raw_rows": 180,
+  "data_start": "2015-01-01",
+  "data_end": "2015-09-09",
+  "feature_names": [
+    "open",
+    "high",
+    "low",
+    "close",
+    "log_volume",
+    "return",
+    "log_range",
+    "overnight_gap",
+    "intraday_return",
+    "momentum_5",
+    "momentum_20",
+    "rolling_volatility",
+    "rolling_sharpe"
+  ],
+  "target_names": [
+    "open",
+    "close",
+    "volatility",
+    "sharpe"
+  ],
+  "risk_definition": {
+    "volatility": "rolling",
+    "window": 20,
+    "annual_rf": 0.0,
+    "annualization": 252,
+    "sharpe": "trailing-window statistic ending on target day, ddof=1"
+  },
+  "config": {
+    "lookback": 16,
+    "hidden": 4,
+    "levels": 1,
+    "kernel": 3,
+    "dropout": 0.1,
+    "batch_size": 32,
+    "epochs": 1,
+    "patience": 8,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "refit_every": 17,
+    "device": "cpu",
+    "price_target": "level"
+  },
+  "seeds": [
+    9416042
+  ],
+  "data_seed": 9416042,
+  "split": {
+    "train": {
+      "n": 86,
+      "start": "2015-02-20",
+      "end": "2015-06-19"
+    },
+    "validation": {
+      "n": 29,
+      "start": "2015-06-22",
+      "end": "2015-07-30"
+    },
+    "test": {
+      "n": 29,
+      "start": "2015-07-31",
+      "end": "2015-09-09"
+    }
+  },
+  "versions": {
+    "python": "3.12.10",
+    "numpy": "2.5.3",
+    "torch": "2.14.0"
+  },
+  "baseline": {
+    "variant": "persistence",
+    "seed": null,
+    "metrics": {
+      "open": {
+        "mae": 0.19355822133091258,
+        "rmse": 0.23667848781320489,
+        "r2": 0.9952751037682149
+      },
+      "close": {
+        "mae": 0.6962204134734181,
+        "rmse": 0.8764693969125691,
+        "r2": 0.9330022573902954
+      },
+      "volatility": {
+        "mae": 0.00459734734572684,
+        "rmse": 0.00662567740905169,
+        "r2": 0.8682921260485694
+      },
+      "sharpe": {
+        "mae": 0.873264685340252,
+        "rmse": 1.1070012515934544,
+        "r2": 0.4862503353459817
+      }
+    },
+    "price_rmse": 0.6419561162251777,
+    "negative_volatility_predictions": 0
+  },
+  "aggregate": {
+    "decoupled": {
+      "open": {
+        "mae": {
+          "mean": 3.468619874208858,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "rmse": {
+          "mean": 4.012423959311427,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "r2": {
+          "mean": -0.35796423947295697,
+          "seed_std": null,
+          "seeds": 1
+        }
+      },
+      "close": {
+        "mae": {
+          "mean": 4.338224818799386,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "rmse": {
+          "mean": 5.224163472190867,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "r2": {
+          "mean": -1.3802368419323998,
+          "seed_std": null,
+          "seeds": 1
+        }
+      },
+      "volatility": {
+        "mae": {
+          "mean": 0.018516223718549635,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "rmse": {
+          "mean": 0.02506548144950545,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "r2": {
+          "mean": -0.8849648961819532,
+          "seed_std": null,
+          "seeds": 1
+        }
+      },
+      "sharpe": {
+        "mae": {
+          "mean": 9.329645972012388,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "rmse": {
+          "mean": 9.441711323803466,
+          "seed_std": null,
+          "seeds": 1
+        },
+        "r2": {
+          "mean": -36.37289695844109,
+          "seed_std": null,
+          "seeds": 1
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "variant": "decoupled",
+      "seed": 9416042,
+      "metrics": {
+        "open": {
+          "mae": 3.468619874208858,
+          "rmse": 4.012423959311427,
+          "r2": -0.35796423947295697
+        },
+        "close": {
+          "mae": 4.338224818799386,
+          "rmse": 5.224163472190867,
+          "r2": -1.3802368419323998
+        },
+        "volatility": {
+          "mae": 0.018516223718549635,
+          "rmse": 0.02506548144950545,
+          "r2": -0.8849648961819532
+        },
+        "sharpe": {
+          "mae": 9.329645972012388,
+          "rmse": 9.441711323803466,
+          "r2": -36.37289695844109
+        }
+      },
+      "price_rmse": 4.657865928374803,
+      "negative_volatility_predictions": 0,
+      "standardized_joint_mse": 1.063115280368644,
+      "training_audit": {
+        "selected_epochs": 1,
+        "selection_history": [
+          {
+            "epoch": 1,
+            "train_uncertainty_loss": 2.147030475527741,
+            "validation_standardized_mse": 2.4829748745622306
+          }
+        ],
+        "folds": [
+          {
+            "fold": 0,
+            "train_count": 115,
+            "test_count": 17,
+            "train_target_end": "2015-07-30",
+            "scaler_feature_end": "2015-07-29",
+            "test_start": "2015-07-31",
+            "test_end": "2015-08-24",
+            "x_scaler": {
+              "mean": [
+                96.97168697599743,
+                97.98796503346202,
+                95.97191843503467,
+                96.97840407490278,
+                13.99117404615649,
+                -0.0003305804466108372,
+                0.0206659945457431,
+                -0.0004537141252409594,
+                0.00013191185574803563,
+                -0.0013714336052793826,
+                -0.010330317778259131,
+                0.15534797880280635,
+                -1.173826864077484
+              ],
+              "scale": [
+                5.692840473503167,
+                5.847031209376767,
+                5.525278941458847,
+                5.691803411280821,
+                0.40007261727465393,
+                0.010620682052047203,
+                0.00980269672660797,
+                0.002820504273299096,
+                0.011057126471654554,
+                0.022595166807156716,
+                0.049540931436336186,
+                0.06075457477136309,
+                5.256736235291668
+              ]
+            },
+            "y_scaler": {
+              "mean": [
+                96.72106923481347,
+                96.7137153831237,
+                0.16154618604361123,
+                -1.177759593652751
+              ],
+              "scale": [
+                6.020942184786176,
+                6.010144931244485,
+                0.06187097915951436,
+                5.623577688478953
+              ]
+            },
+            "log_variance": [
+              -0.0006321355467662215,
+              0.003664822783321142,
+              -0.002533420454710722,
+              0.0036957263946533203
+            ],
+            "checkpoint": "outputs/project_smoke/checkpoints/decoupled_seed9416042_fold0.pt",
+            "history": [
+              {
+                "epoch": 1,
+                "train_uncertainty_loss": 2.160966638896776,
+                "validation_standardized_mse": null
+              }
+            ]
+          },
+          {
+            "fold": 1,
+            "train_count": 132,
+            "test_count": 12,
+            "train_target_end": "2015-08-24",
+            "scaler_feature_end": "2015-08-21",
+            "test_start": "2015-08-25",
+            "test_end": "2015-09-09",
+            "x_scaler": {
+              "mean": [
+                96.84199295652476,
+                97.869349683043,
+                95.87178303204531,
+                96.8894119521093,
+                13.968353852142268,
+                0.0001301416783991325,
+                0.020515886359441775,
+                -0.0004139989090089872,
+                0.0005519963436235157,
+                0.00043600765921448213,
+                -0.0028130508662266543,
+                0.1511310879778967,
+                -0.3648953075334063
+              ],
+              "scale": [
+                5.408260460530053,
+                5.548920560985372,
+                5.252636168037978,
+                5.403898745251797,
+                0.41639708834767264,
+                0.010494374625141073,
+                0.009806665108696072,
+                0.002757292749680448,
+                0.010851612346245848,
+                0.02251242103049626,
+                0.05125014207055682,
+                0.05860087067880459,
+                5.463920940669141
+              ]
+            },
+            "y_scaler": {
+              "mean": [
+                96.65439761713058,
+                96.7044639843788,
+                0.15642910952525396,
+                -0.3027327187128472
+              ],
+              "scale": [
+                5.6720767389587134,
+                5.674163223320353,
+                0.05958863825569625,
+                5.7517616233620705
+              ]
+            },
+            "log_variance": [
+              0.0002536203828640282,
+              0.002692257985472679,
+              -0.0006311809993349016,
+              0.003744943765923381
+            ],
+            "checkpoint": "outputs/project_smoke/checkpoints/decoupled_seed9416042_fold1.pt",
+            "history": [
+              {
+                "epoch": 1,
+                "train_uncertainty_loss": 2.1669306393825645,
+                "validation_standardized_mse": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "metric_notes": "Price metrics are USD only for USD input. Risk metrics are separate annualized units. Standardized joint MSE is a diagnostic, not the learned uncertainty training objective. No trading performance is inferred from forecast metrics."
+}
